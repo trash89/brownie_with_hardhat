@@ -10,7 +10,6 @@ cd brownie_with_hardhat/
 ```
 
 First, init brownie as it requests the folder to be empty
-brownie init
 
 ```shell
 brownie init
