@@ -4,30 +4,31 @@ This project demonstrates how to configure brownie and hardhat in order to use t
 
 Create a folder
 
-```shell
+```
 mkdir brownie_with_hardhat
 cd brownie_with_hardhat/
 ```
 
 First, init brownie as it requests the folder to be empty
 
-```shell
+```
 brownie init
 ```
 
+```
 Brownie v1.17.2 - Python development framework for Ethereum
 
 SUCCESS: A new Brownie project has been initialized at /brownie_with_hardhat
 
-````
+```
 
 Initialize npm
 
-```shell
+```
 npm init -y
-````
+```
 
-```shell
+```
 Wrote to /brownie_with_hardhat/package.json:
 
 {
@@ -49,21 +50,17 @@ Wrote to /brownie_with_hardhat/package.json:
 
 Install hardhat
 
-```shell
-npm install --save-dev hardhat
 ```
-
-```shell
-added 336 packages, and audited 337 packages in 32s
+npm install --save-dev hardhat
 ```
 
 Create a basic project in hardhat:
 
-```shell
+```
 npx hardhat
 ```
 
-```shell
+```
 Welcome to Hardhat v2.8.4
 
 ✔ What do you want to do? · Create a basic sample project
@@ -78,11 +75,11 @@ See the README.md file for some example tasks you can run.
 
 Modify hardhat.config.js to setup the hardhat network
 
-```shell
+```
 vi hardhat.config.js
 ```
 
-```shell
+```
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -104,11 +101,11 @@ module.exports = {
 
 Add a "Live" network in brownie, to connect to the hardhat network
 
-```shell
+```
 brownie networks add Ethereum hardhat-local host=http://127.0.0.1:8545 chainid=31337
 ```
 
-```shell
+```
 Brownie v1.17.2 - Python development framework for Ethereum
 
 SUCCESS: A new network 'hardhat-local' has been added
@@ -120,11 +117,11 @@ SUCCESS: A new network 'hardhat-local' has been added
 
 Create brownie-config.yaml to declare hardhat-local as a default network
 
-```shell
+```
 vi brownie-config.yaml
 ```
 
-```shell
+```
 networks:
 default: hardhat-local
 development:
@@ -133,11 +130,11 @@ verify: True
 
 Start the hardhat-local blockchain network:
 
-```shell
+```
 npx hardhat node
 ```
 
-```shell
+```
 Started HTTP and WebSocket JSON-RPC server at http://127.0.0.1:8545/
 
 Accounts
@@ -152,21 +149,21 @@ Account #0: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 (10000 ETH)
 
 In contracts/Greeter.sol, modify the import console statement:
 
-```shell
+```
 vi contracts/Greeter.sol
 ```
 
-```shell
+```
 import "../node_modules/hardhat/console.sol";
 ```
 
 Launch another terminal and brownie compile the Greeter contract
 
-```shell
+```
 brownie compile
 ```
 
-```shell
+```
 Brownie v1.17.2 - Python development framework for Ethereum
 
 Compiling contracts...
@@ -182,11 +179,11 @@ Project has been compiled. Build artifacts saved at /brownie_with_hardhat/build/
 
 In the scripts folder, create the deployment script in brownie
 
-```shell
+```
 vi scripts/deploy.py
 ```
 
-```shell
+```
 from brownie import accounts, Greeter
 
 
@@ -197,11 +194,11 @@ def main():
 
 Deploy with brownie
 
-```shell
+```
 brownie run scripts/deploy.py
 ```
 
-```shell
+```
 Brownie v1.17.2 - Python development framework for Ethereum
 
 BrownieWithHardhatProject is the active project.
@@ -217,7 +214,7 @@ Greeter deployed at 0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 See in the terminal where hardhat network were launched :
 
-```shell
+```
   Contract deployment: <UnrecognizedContract>
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
   Transaction:         0x2228515667d0b69fae9fdb8cd0480fcffcad6d5ecc616b5eb0c7e5fbf92243d7
@@ -232,11 +229,11 @@ See in the terminal where hardhat network were launched :
 
 Interacting with the deployed contract from brownie console:
 
-```shell
+```
 brownie console
 ```
 
-```shell
+```
 >>> Greeter[-1].setGreeting("Hello brownie",{"from":accounts[0]})
 Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59
   Gas price: 1.0 gwei   Gas limit: 38155   Nonce: 1
@@ -247,7 +244,7 @@ Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c
 
 See in the terminal where hardhat network were launched :
 
-```shell
+```
 eth_sendTransaction
   Contract call:       <UnrecognizedContract>
   Transaction:         0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59
