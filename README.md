@@ -79,7 +79,7 @@ Modify hardhat.config.js to setup the hardhat network
 vi hardhat.config.js
 ```
 
-```
+```javascript
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -153,7 +153,7 @@ In contracts/Greeter.sol, modify the import console statement:
 vi contracts/Greeter.sol
 ```
 
-```
+```solidity
 import "../node_modules/hardhat/console.sol";
 ```
 
@@ -183,7 +183,7 @@ In the scripts folder, create the deployment script in brownie
 vi scripts/deploy.py
 ```
 
-```
+```python
 from brownie import accounts, Greeter
 
 
@@ -233,7 +233,7 @@ Interacting with the deployed contract from brownie console:
 brownie console
 ```
 
-```
+```Solidity
 >>> Greeter[-1].setGreeting("Hello brownie",{"from":accounts[0]})
 Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59
   Gas price: 1.0 gwei   Gas limit: 38155   Nonce: 1
