@@ -1,0 +1,4 @@
+networks:
+  default: hardhat-local
+  development:
+    verify: True
