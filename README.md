@@ -82,27 +82,6 @@ brownie init
 
 By default, brownie tries to connect to http://127.0.0.1:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previously.
 
-## Add a "Live" network in brownie, to connect to the hardhat network
-
-In order to have the persistence accross contracts deployments:
-
-```
-brownie networks add Ethereum hardhat-local host=http://127.0.0.1:8545 chainid=31337
-```
-
-Create brownie-config.yaml and declare hardhat-local as a default network:
-
-```bash
-vi brownie-config.yaml
-```
-
-And declare it as follows:
-
-```
-networks:
-default: hardhat-local
-```
-
 ## Utilisation of console.log in solidity contracts with brownie
 
 Inside the brownie project, in the contracts folder, copy the console.sol file from the hardhat installation folder and the sample Greeter.sol contract.
