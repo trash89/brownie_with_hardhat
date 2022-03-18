@@ -4,14 +4,14 @@ This project demonstrates how to use brownie with the hardhat network in order t
 
 ## Installing hardhat
 
-Create a folder
+Create a folder:
 
 ```bash
 mkdir brownie_with_hardhat
 cd brownie_with_hardhat/
 ```
 
-Install hardhat :
+Install hardhat:
 
 ```bash
 npm init -y
@@ -40,7 +40,7 @@ Project created
 See the README.md file for some example tasks you can run.
 ```
 
-Modify hardhat.config.js to setup the hardhat network
+Modify hardhat.config.js to setup the hardhat network:
 
 ```bash
 vi hardhat.config.js
@@ -72,7 +72,7 @@ vi hardhat.config.js
 
 ## Connecting brownie to the hardhat network
 
-Initialize a brownie project in a separate folder
+Initialize a brownie project in a separate folder:
 
 ```bash
 mkdir brownie_test
@@ -80,7 +80,7 @@ cd brownie_test
 brownie init
 ```
 
-By default, brownie tries to connect to localhost:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previeously.
+By default, brownie tries to connect to localhost:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previously.
 
 ## Add a "Live" network in brownie, to connect to the hardhat network
 
@@ -90,7 +90,7 @@ In order to have the persistence accross contracts deplyments:
 brownie networks add Ethereum hardhat-local host=http://127.0.0.1:8545 chainid=31337
 ```
 
-Create brownie-config.yaml to declare hardhat-local as a default network
+Create brownie-config.yaml to declare hardhat-local as a default network:
 
 ```bash
 vi brownie-config.yaml
@@ -137,7 +137,7 @@ Generating build data...
 Project has been compiled. Build artifacts saved at /brownie_with_hardhat/build/contracts
 ```
 
-In the scripts folder, create the deployment script in brownie
+In the scripts folder, create the deployment script in brownie:
 
 ```bash
 vi scripts/deploy.py
@@ -151,7 +151,7 @@ def main():
     print(f"Greeter deployed at {greeter}")
 ```
 
-Deploy with brownie
+Deploy with brownie:
 
 ```bash
 brownie run scripts/deploy.py
@@ -171,7 +171,7 @@ Transaction sent: 0x2228515667d0b69fae9fdb8cd0480fcffcad6d5ecc616b5eb0c7e5fbf922
 Greeter deployed at 0x5FbDB2315678afecb367f032d93F642f64180aa3
 ```
 
-See in the terminal where hardhat network were launched :
+See in the terminal where hardhat network has been launched:
 
 ```bash
   Contract deployment: <UnrecognizedContract>
@@ -186,7 +186,7 @@ See in the terminal where hardhat network were launched :
     Deploying a Greeter with greeting: Hello
 ```
 
-Interacting with the deployed contract from brownie console:
+Interact with the deployed contract from brownie console:
 
 ```bash
 brownie console
@@ -201,7 +201,7 @@ Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c
 <Transaction '0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59'>
 ```
 
-See in the terminal where hardhat network were launched :
+See in the terminal where hardhat network has been launched :
 
 ```Solidity
 eth_sendTransaction
