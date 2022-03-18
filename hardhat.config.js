@@ -21,10 +21,16 @@ module.exports = {
   networks: {
     hardhat: {
       initialBaseFeePerGas: 0,
+      accounts: {
+        mnemonic: "test test test test test test test test test test test junk",
+        path: "m/44'/60'/0'/0",
+        count: 10,
+        accountsBalance: "1000000000000000000000",
+      },
     },
   },
   solidity: {
-    version: "0.8.12",
+    version: "0.8.13",
     settings: {
       optimizer: {
         enabled: true,
