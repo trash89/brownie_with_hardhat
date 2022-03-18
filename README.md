@@ -67,7 +67,7 @@ This configures the hardhat network to create 10 accounts with 1000 ETH each, us
 Now, we can start the hardhat network in this folder:
 
 ```bash
-vi hardhat.config.js
+npx hardhat node
 ```
 
 ## Connecting brownie to the hardhat network
@@ -80,17 +80,17 @@ cd brownie_test
 brownie init
 ```
 
-By default, brownie tries to connect to localhost:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previously.
+By default, brownie tries to connect to http://127.0.0.1:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previously.
 
 ## Add a "Live" network in brownie, to connect to the hardhat network
 
-In order to have the persistence accross contracts deplyments:
+In order to have the persistence accross contracts deployments:
 
 ```
 brownie networks add Ethereum hardhat-local host=http://127.0.0.1:8545 chainid=31337
 ```
 
-Create brownie-config.yaml to declare hardhat-local as a default network:
+Create brownie-config.yaml and declare hardhat-local as a default network:
 
 ```bash
 vi brownie-config.yaml
@@ -186,7 +186,7 @@ See in the terminal where hardhat network has been launched:
     Deploying a Greeter with greeting: Hello
 ```
 
-Interact with the deployed contract from brownie console:
+Interact with the deployed contract from the brownie console:
 
 ```bash
 brownie console
@@ -201,7 +201,7 @@ Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c
 <Transaction '0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59'>
 ```
 
-See in the terminal where hardhat network has been launched :
+See in the terminal where hardhat network has been launched:
 
 ```Solidity
 eth_sendTransaction
