@@ -202,7 +202,7 @@ Interact with the deployed contract from the brownie console:
 brownie console
 ```
 
-```Solidity
+```python
 >>> greeter = Greeter.deploy("Hello", {"from": accounts[0]})
 Transaction sent: 0x9fb8ca22636848bcbca4b0e84f10a991c227440082e56dac4db87cab305517a7
   Gas price: 0.0 gwei   Gas limit: 30000000   Nonce: 2
@@ -219,7 +219,7 @@ Transaction sent: 0x418c5c98621a2cb97a7fc840d1e428adb5d7eb3fdd70222989ad46491b00
 
 See in the terminal where hardhat network has been launched:
 
-```Solidity
+```python
   Contract call:       <UnrecognizedContract>
   Transaction:         0x418c5c98621a2cb97a7fc840d1e428adb5d7eb3fdd70222989ad46491b00cb15
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
