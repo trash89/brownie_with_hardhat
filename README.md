@@ -82,18 +82,52 @@ brownie init
 
 By default, brownie tries to connect to http://127.0.0.1:8545 when the default network is development, so when running brownie commands without specifying a network, it will connect and use the hardhat network started previously.
 
+```bash
+brownie console
+```
+
+```python
+Brownie v1.18.1 - Python development framework for Ethereum
+
+Compiling contracts...
+  Solc version: 0.8.13
+  Optimizer: Enabled  Runs: 200
+  EVM Version: Istanbul
+Generating build data...
+ - Greeter
+ - console
+
+BrownieWithHardhatProject is the active project.
+Attached to local RPC client listening at '127.0.0.1:8545'...
+Brownie environment is ready.
+```
+
 ## Utilisation of console.log in solidity contracts with brownie
 
 Inside the brownie project, in the contracts folder, copy the console.sol file from the hardhat installation folder and the sample Greeter.sol contract.
 
 In contracts/Greeter.sol, insert the import console.sol statement:
 
-```bash
-vi contracts/Greeter.sol
-```
-
 ```solidity
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
+
 import "./console.sol";
+
+contract Greeter {
+    string private greeting;
+    constructor(string memory _greeting) {
+        console.log("Deploying a Greeter with greeting:", _greeting);
+        greeting = _greeting;
+    }
+    function greet() public view returns (string memory) {
+        return greeting;
+    }
+    function setGreeting(string memory _greeting) public {
+        console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
+        greeting = _greeting;
+    }
+}
 ```
 
 Compile the Greeter contract:
@@ -103,10 +137,10 @@ brownie compile
 ```
 
 ```bash
-Brownie v1.17.2 - Python development framework for Ethereum
+Brownie v1.18.1 - Python development framework for Ethereum
 
 Compiling contracts...
-  Solc version: 0.8.12
+  Solc version: 0.8.13
   Optimizer: Enabled  Runs: 200
   EVM Version: Istanbul
 Generating build data...
@@ -116,11 +150,7 @@ Generating build data...
 Project has been compiled. Build artifacts saved at /brownie_with_hardhat/build/contracts
 ```
 
-In the scripts folder, create the deployment script in brownie:
-
-```bash
-vi scripts/deploy.py
-```
+In the scripts folder, create the deployment script deploy.py:
 
 ```python
 from brownie import accounts, Greeter
@@ -137,14 +167,15 @@ brownie run scripts/deploy.py
 ```
 
 ```bash
-Brownie v1.17.2 - Python development framework for Ethereum
+Brownie v1.18.1 - Python development framework for Ethereum
 
 BrownieWithHardhatProject is the active project.
+Attached to local RPC client listening at '127.0.0.1:8545'...
 
 Running 'scripts/deploy.py::main'...
-Transaction sent: 0x2228515667d0b69fae9fdb8cd0480fcffcad6d5ecc616b5eb0c7e5fbf92243d7
-  Gas price: 1.0 gwei   Gas limit: 421741   Nonce: 0
-  Greeter.constructor confirmed   Block: 1   Gas used: 383401 (90.91%)
+Transaction sent: 0x3b1a6a96166150370b0e53982449424fb4b286aa0d4d564223b5e4a37249509a
+  Gas price: 0.0 gwei   Gas limit: 30000000   Nonce: 0
+  Greeter.constructor confirmed   Block: 1   Gas used: 383178 (1.28%)
   Greeter deployed at: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 Greeter deployed at 0x5FbDB2315678afecb367f032d93F642f64180aa3
@@ -155,11 +186,11 @@ See in the terminal where hardhat network has been launched:
 ```bash
   Contract deployment: <UnrecognizedContract>
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Transaction:         0x2228515667d0b69fae9fdb8cd0480fcffcad6d5ecc616b5eb0c7e5fbf92243d7
+  Transaction:         0x3b1a6a96166150370b0e53982449424fb4b286aa0d4d564223b5e4a37249509a
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            383401 of 421741
-  Block #1:            0x2c66d2dbcadb8d035ef314a78827e50fc604f5296bec1ec25ca5f77e0e4acd16
+  Gas used:            383178 of 30000000
+  Block #1:            0x82b5f14636b9eff5a4efea6417523112e605ab6db4d0d02d19469b803d552ab9
 
   console.log:
     Deploying a Greeter with greeting: Hello
@@ -172,25 +203,30 @@ brownie console
 ```
 
 ```Solidity
->>> Greeter[-1].setGreeting("Hello brownie",{"from":accounts[0]})
-Transaction sent: 0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59
-  Gas price: 1.0 gwei   Gas limit: 38155   Nonce: 1
-  Greeter.setGreeting confirmed   Block: 2   Gas used: 34419 (90.21%)
+>>> greeter = Greeter.deploy("Hello", {"from": accounts[0]})
+Transaction sent: 0x9fb8ca22636848bcbca4b0e84f10a991c227440082e56dac4db87cab305517a7
+  Gas price: 0.0 gwei   Gas limit: 30000000   Nonce: 2
+  Greeter.constructor confirmed   Block: 3   Gas used: 383178 (1.28%)
+  Greeter deployed at: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
 
-<Transaction '0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59'>
+>>> greeter.setGreeting("Hello brownie",{"from":accounts[0]})
+Transaction sent: 0x418c5c98621a2cb97a7fc840d1e428adb5d7eb3fdd70222989ad46491b00cb15
+  Gas price: 0.0 gwei   Gas limit: 30000000   Nonce: 3
+  Greeter.setGreeting confirmed   Block: 4   Gas used: 34410 (0.11%)
+
+<Transaction '0x418c5c98621a2cb97a7fc840d1e428adb5d7eb3fdd70222989ad46491b00cb15'>
 ```
 
 See in the terminal where hardhat network has been launched:
 
 ```Solidity
-eth_sendTransaction
   Contract call:       <UnrecognizedContract>
-  Transaction:         0x5c3948e35a45e15b704b419ca5b82a99393e1a8840466ce440067fb0551c4e59
+  Transaction:         0x418c5c98621a2cb97a7fc840d1e428adb5d7eb3fdd70222989ad46491b00cb15
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
   Value:               0 ETH
-  Gas used:            34419 of 38155
-  Block #2:            0x854fd459c2bc13f8ba8a05548b1ef628333297335c07becf67ae809e0d29ca01
+  Gas used:            34410 of 30000000
+  Block #4:            0x78087590fdd22bfd49e8b80c451b525312e3a8228d6bc90543a020d8433b9ad6
 
   console.log:
     Changing greeting from 'Hello' to 'Hello brownie'
